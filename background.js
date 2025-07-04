@@ -3,6 +3,9 @@ let startTime = null;
 let tabTimes = {};
 let isIdle = false;
 
+console.log("🔄 Tab Time Tracker service worker loaded.");
+
+
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
   if (!isIdle) await handleTabChange(activeInfo.tabId);
 });
