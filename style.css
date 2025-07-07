@@ -7,3 +7,18 @@ body {
 h2 {
   text-align: center;
 }
+button {
+  margin: 5px 0;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #36a2eb;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2b8bc2;
+}

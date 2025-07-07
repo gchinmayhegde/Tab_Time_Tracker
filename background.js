@@ -5,6 +5,23 @@ let isIdle = false;
 
 console.log("🔄 Tab Time Tracker service worker loaded.");
 
+function getTodayDateStr() {
+  const now = new Date();
+  return now.toISOString().split("T")[0]; // e.g., "2025-07-04"
+}
+
+async function checkAndResetIfNewDay() {
+  const { lastTrackedDate, tabTimes } = await chrome.storage.local.get(["lastTrackedDate", "tabTimes"]);
+  const today = getTodayDateStr();
+
+  if (lastTrackedDate !== today) {
+    console.log("🧹 New day detected — resetting tabTimes.");
+    await chrome.storage.local.set({
+      lastTrackedDate: today,
+      tabTimes: {} // Optional: you could archive old data instead
+    });
+  }
+}
 
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
   if (!isIdle) await handleTabChange(activeInfo.tabId);
@@ -61,3 +78,7 @@ setInterval(async () => {
     await chrome.storage.local.set({ tabTimes });
   }
 }, 10000);
+
+checkAndResetIfNewDay();
+setInterval(checkAndResetIfNewDay, 60 * 60 * 1000);
+
