@@ -5,11 +5,36 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Daily Summary</h2>
-  <canvas id="chart" width="300" height="300"></canvas>
-  <br />
-  <button id="export-csv">Export as CSV</button>
-  <button id="export-json">Export as JSON</button>
+  <div class="header">
+    <h2>Tab Time Tracker</h2>
+    <div class="live-indicator">
+      <span class="live-dot"></span>
+      <span>Live</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Top Active Tabs</h3>
+    <div id="active-tabs-list" class="tabs-container">
+      <!-- Active tabs will be populated here -->
+    </div>
+  </div>
+
+  <div class="section chart-section">
+    <h3>Daily Overview</h3>
+    <canvas id="chart" width="300" height="200"></canvas>
+  </div>
+
+  <div class="section">
+    <button id="export-csv" class="export-btn">
+      <span class="btn-icon">📊</span>
+      Export as CSV
+    </button>
+    <button id="export-json" class="export-btn">
+      <span class="btn-icon">📄</span>
+      Export as JSON
+    </button>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="popup.js"></script>
